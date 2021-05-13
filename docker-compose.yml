@@ -27,7 +27,6 @@ services:
       #   - edition=team
       #   - PUID=1000
       #   - PGID=1000
-      #   - MM_VERSION=5.31
     restart: unless-stopped
     volumes:
       - ./volumes/app/mattermost/config:/mattermost/config:rw
@@ -55,13 +54,11 @@ services:
   web:
     build: web
     ports:
-      - "80:8080"
-      - "443:8443"
+      - "80:80"
+      - "443:443"
     read_only: true
     restart: unless-stopped
     volumes:
       # This directory must have cert files if you want to enable SSL
       - ./volumes/web/cert:/cert:ro
       - /etc/localtime:/etc/localtime:ro
-    cap_drop:
-      - ALL
